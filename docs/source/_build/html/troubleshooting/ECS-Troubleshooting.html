@@ -1,0 +1,523 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>ECS Software 3.x - Troubleshooting Tips &#8212; ECS-CommunityEdition 3.2.2.0 documentation</title>
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Frequently Asked Questions" href="FAQ.html" />
+    <link rel="prev" title="ECS Community Edition Utilities" href="../utilities/utilities.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="FAQ.html" title="Frequently Asked Questions"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../utilities/utilities.html" title="ECS Community Edition Utilities"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">ECS-CommunityEdition 3.2.2.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="ecs-software-3-x-troubleshooting-tips">
+<h1>ECS Software 3.x - Troubleshooting Tips<a class="headerlink" href="#ecs-software-3-x-troubleshooting-tips" title="Permalink to this headline">¶</a></h1>
+<p>This is a list of troubleshooting tips and nuggets that will help with
+issues. If you still have problems, please use the support section.</p>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="if-you-change-deploy-yml-after-running-step1-you-must-run-update-deploy-before-running-step1-again-otherwise-you-will-likely-get-the-following-error">
+<h3>If you change deploy.yml after running step1, you must run <code class="docutils literal notranslate"><span class="pre">update_deploy</span></code> before running step1 again. Otherwise you will likely get the following error:<a class="headerlink" href="#if-you-change-deploy-yml-after-running-step1-you-must-run-update-deploy-before-running-step1-again-otherwise-you-will-likely-get-the-following-error" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>{&quot;failed&quot;: true, &quot;msg&quot;: &quot;An unhandled exception occurred while running the lookup plugin &#39;file&#39;.
+ Error was a &lt;class &#39;ansible.errors.AnsibleFileNotFound&#39;&gt;, original message: the file_name
+ &#39;/opt/ssh/id_ed25519.pub&#39; does not exist, or is not readable&quot;}
+</pre></div>
+</div>
+</div>
+<div class="section" id="a-block-device-configured-in-deploy-yml-for-data-nodes-is-already-partitioned">
+<h3><code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">block</span> <span class="pre">device</span> <span class="pre">configured</span> <span class="pre">in</span> <span class="pre">deploy.yml</span> <span class="pre">for</span> <span class="pre">data</span> <span class="pre">nodes</span> <span class="pre">is</span> <span class="pre">already</span> <span class="pre">partitioned.</span></code><a class="headerlink" href="#a-block-device-configured-in-deploy-yml-for-data-nodes-is-already-partitioned" title="Permalink to this headline">¶</a></h3>
+<p>This error often shows up after a failed installation attempt. In order
+to clean up the block devices to start over run
+<code class="docutils literal notranslate"><span class="pre">ecsremove</span> <span class="pre">purge-nodes</span></code>.</p>
+</div>
+</div>
+<div class="section" id="provisioning-of-ecs">
+<h2>Provisioning of ECS<a class="headerlink" href="#provisioning-of-ecs" title="Permalink to this headline">¶</a></h2>
+<p>It takes roughly 30 minutes to get the system provisioned for Step2. ECS
+creates Storage Pools, Replication Groups with the attached disks. If
+Step2 is successful, you should see something along these lines.</p>
+<div class="section" id="checking-step-2-object-provisioning-progress">
+<h3>Checking Step 2 Object provisioning progress<a class="headerlink" href="#checking-step-2-object-provisioning-progress" title="Permalink to this headline">¶</a></h3>
+<p>If you want to see if system is making progress:</p>
+<ol class="arabic simple">
+<li><p>Log into one of ECS data nodes.</p></li>
+<li><p>Navigate to the <strong>/var/log/vipr/emcvipr-object/</strong> directory</p></li>
+<li><p>View the <strong>/var/log/vipr/emc-viprobject/ssm.log</strong> (tail -f
+/var/log/vipr/emcvipr-object/ssm.log )</p></li>
+</ol>
+<p><strong>Note:</strong> there are ~2k tables to be initialized for the provisioning to
+complete. You can check the following command to see if the tables are
+close to that number and if all tables are ready. Run this from the
+node.</p>
+<p><code class="docutils literal notranslate"><span class="pre">curl</span> <span class="pre">-X</span> <span class="pre">GET</span> <span class="pre">&quot;http://&lt;YourIPAddress&gt;:9101/stats/dt/DTInitStat”</span></code></p>
+</div>
+</div>
+<div class="section" id="ecs-services">
+<h2>ECS Services<a class="headerlink" href="#ecs-services" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="docker-container-immediately-exits-on-startup">
+<h3>Docker Container immediately exits on startup<a class="headerlink" href="#docker-container-immediately-exits-on-startup" title="Permalink to this headline">¶</a></h3>
+<p>If your docker instance immediately exits when started, please ensure
+that the entries in <code class="docutils literal notranslate"><span class="pre">/etc/hosts</span></code> on the host system and
+<code class="docutils literal notranslate"><span class="pre">network.json</span></code> in the install directory are correct (the latter should
+reflect the host’s public IP and the corresponding network adapter).</p>
+</div>
+<div class="section" id="ecs-web-portal-will-not-start">
+<h3>ECS web portal will not start<a class="headerlink" href="#ecs-web-portal-will-not-start" title="Permalink to this headline">¶</a></h3>
+<p>The portal service will listen on ports 443 and 4443; check to make sure
+no other services (such as virtual hosts or additional instances of
+ECSCE) are not attempting to utilize these same ports.</p>
+<p>For multiple-node installations, the <code class="docutils literal notranslate"><span class="pre">/etc/hosts</span></code> file on the host VM
+should include entries for each node and their hostname. Additionally,
+many services including the ECS web portal will not start until all
+nodes specified to the installation step 1 script have been successfully
+installed and concurrently running; the installation script should be
+run on all nodes in a cluster before attempting authentication or use of
+the GUI.</p>
+<p>If attempting to authenticate results in a response of “Connection
+Refused”, review the below section and ensure all necessary ports are
+open on all ECS nodes in the cluster.</p>
+</div>
+</div>
+<div class="section" id="nfs">
+<h2>NFS<a class="headerlink" href="#nfs" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="necessary-nfs-ports">
+<h3>Necessary NFS Ports<a class="headerlink" href="#necessary-nfs-ports" title="Permalink to this headline">¶</a></h3>
+<p>The following ports must be opened for NFS to function properly</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Port Number</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>111</p></td>
+</tr>
+<tr class="row-odd"><td><p>2049</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="nfs-volume-refuses-to-mount">
+<h3>NFS Volume Refuses to Mount<a class="headerlink" href="#nfs-volume-refuses-to-mount" title="Permalink to this headline">¶</a></h3>
+<p>ECS does support the NFS file system. However, troubles can occur when
+ECS is installed on the full version, or “Everything” version, of CentOS
+7. <strong>*Note that the following solution is not necessary on CentOS 7
+Minimal.*</strong></p>
+<div class="section" id="the-problem">
+<h4>The Problem<a class="headerlink" href="#the-problem" title="Permalink to this headline">¶</a></h4>
+<p>CentOS 7 Everything starts with NFS/RPC/Portmap components running in
+the root scope. This is a problem as the ECS-CE Docker container runs
+its own version of rpcbind. This is the instance of rpcbind that ECS is
+intended to communicate with. When CentOS is running rpcbind in root
+scope in addition to the ECS Docker container, a conflict is created and
+a NFS volume cannot be mounted.</p>
+<p>This can be seen by <code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">rpcinfo</span> <span class="pre">-p</span></code> returning no NFS services.</p>
+</div>
+<div class="section" id="the-solution">
+<h4>The Solution<a class="headerlink" href="#the-solution" title="Permalink to this headline">¶</a></h4>
+<p>The conflict can be resolved by simply running
+<code class="docutils literal notranslate"><span class="pre">systemctl</span> <span class="pre">disable</span> <span class="pre">rpcbind</span></code>. This command will shut down the rpc
+service running on the host OS while leaving the Docker instance
+untouched.</p>
+<p>To confirm the CentOS service is gone, run <code class="docutils literal notranslate"><span class="pre">rpcinfo</span> <span class="pre">-p</span></code> in the CentOS
+shell. This should return an error:
+<code class="docutils literal notranslate"><span class="pre">rpcinfo:</span> <span class="pre">can't</span> <span class="pre">contact</span> <span class="pre">portmapper:</span> <span class="pre">RPC:</span> <span class="pre">Remote</span> <span class="pre">system</span> <span class="pre">error</span> <span class="pre">-</span> <span class="pre">No</span> <span class="pre">such</span> <span class="pre">file</span> <span class="pre">or</span> <span class="pre">directory</span></code></p>
+<p>The same command, <code class="docutils literal notranslate"><span class="pre">rpcinfo-p</span></code>, can be run in the Docker container,
+which should return something similar to:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">program</span> <span class="n">vers</span> <span class="n">proto</span>   <span class="n">port</span>  <span class="n">service</span>
+ <span class="mi">100000</span>    <span class="mi">4</span>   <span class="n">tcp</span>    <span class="mi">111</span>  <span class="n">portmapper</span>
+ <span class="mi">100000</span>    <span class="mi">3</span>   <span class="n">tcp</span>    <span class="mi">111</span>  <span class="n">portmapper</span>
+ <span class="mi">100000</span>    <span class="mi">2</span>   <span class="n">tcp</span>    <span class="mi">111</span>  <span class="n">portmapper</span>
+ <span class="mi">100000</span>    <span class="mi">4</span>   <span class="n">udp</span>    <span class="mi">111</span>  <span class="n">portmapper</span>
+ <span class="mi">100000</span>    <span class="mi">3</span>   <span class="n">udp</span>    <span class="mi">111</span>  <span class="n">portmapper</span>
+ <span class="mi">100000</span>    <span class="mi">2</span>   <span class="n">udp</span>    <span class="mi">111</span>  <span class="n">portmapper</span>
+ <span class="mi">100005</span>    <span class="mi">3</span>   <span class="n">tcp</span>   <span class="mi">2049</span>  <span class="n">mountd</span>
+ <span class="mi">100005</span>    <span class="mi">3</span>   <span class="n">udp</span>   <span class="mi">2049</span>  <span class="n">mountd</span>
+ <span class="mi">100003</span>    <span class="mi">3</span>   <span class="n">tcp</span>   <span class="mi">2049</span>  <span class="n">nfs</span>
+ <span class="mi">100024</span>    <span class="mi">1</span>   <span class="n">tcp</span>   <span class="mi">2049</span>  <span class="n">status</span>
+ <span class="mi">100021</span>    <span class="mi">4</span>   <span class="n">tcp</span>  <span class="mi">10000</span>  <span class="n">nlockmgr</span>
+ <span class="mi">100021</span>    <span class="mi">4</span>   <span class="n">udp</span>  <span class="mi">10000</span>  <span class="n">nlockmgr</span>
+</pre></div>
+</div>
+<p>NFS should now function correctly.</p>
+</div>
+</div>
+</div>
+<div class="section" id="ibm-tivoli-monitoring">
+<h2>IBM Tivoli Monitoring<a class="headerlink" href="#ibm-tivoli-monitoring" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="issue">
+<h3>Issue<a class="headerlink" href="#issue" title="Permalink to this headline">¶</a></h3>
+<p>ECS Community edition will fail to completely initialize the storage
+pool on machines that have the IBM Tivoli Monitoring agent installed.
+The storage pool will forever stick in the “Initializing” state and
+attempts to create a VDC will result in HTTP 400 errors.</p>
+</div>
+<div class="section" id="analysis">
+<h3>Analysis<a class="headerlink" href="#analysis" title="Permalink to this headline">¶</a></h3>
+<p>Doing a <code class="docutils literal notranslate"><span class="pre">ps</span> <span class="pre">-ef</span></code> inside the container will show that dataheadsvc and
+metering are restarting frequently. Looking at
+<code class="docutils literal notranslate"><span class="pre">/opt/storageos/logs/metering.log</span></code> will show a bind exception on port
+10110. This port is already bound by Tivoli’s <code class="docutils literal notranslate"><span class="pre">k10agent</span></code> process.</p>
+</div>
+<div class="section" id="workaround">
+<h3>Workaround<a class="headerlink" href="#workaround" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><p>Uninstall Tivoli Monitoring or</p></li>
+<li><p>Change the port on impacted nodes.</p></li>
+</ol>
+<div class="section" id="changing-the-port-on-ecs">
+<h4>Changing the port on ECS<a class="headerlink" href="#changing-the-port-on-ecs" title="Permalink to this headline">¶</a></h4>
+<p>On <em>all</em> nodes, you will need to edit <code class="docutils literal notranslate"><span class="pre">/opt/storageos/conf/mt-var.xml</span></code>
+to change the bind port from 10110 to 10109. Edit the file and change
+the line:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="nb">property</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;serviceUrl&quot;</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;service:jmx:rmi://127.0.0.1:10110/jndi/rmi://127.0.0.1:10111/sos&quot;</span> <span class="o">/&gt;</span>
+</pre></div>
+</div>
+<p>to:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="nb">property</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;serviceUrl&quot;</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;service:jmx:rmi://127.0.0.1:10109/jndi/rmi://127.0.0.1:10111/sos&quot;</span> <span class="o">/&gt;</span>
+</pre></div>
+</div>
+<p>Then restart the metering service:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>kill `pidof metering`
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="network-troubleshooting">
+<h2>Network Troubleshooting<a class="headerlink" href="#network-troubleshooting" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="for-those-operating-behind-emc-firewall">
+<h3>For those operating behind EMC firewall<a class="headerlink" href="#for-those-operating-behind-emc-firewall" title="Permalink to this headline">¶</a></h3>
+<p>To install ECS Community Edition under these conditions, please view the
+readme file under <strong>/emc-ssl-cert</strong> for further instructions in
+installing the necessary CA certificate.</p>
+</div>
+<div class="section" id="disabling-ipv6">
+<h3>Disabling IPv6<a class="headerlink" href="#disabling-ipv6" title="Permalink to this headline">¶</a></h3>
+<p>ECS Community Edition does not yet support IPv6. The following procedure
+can be used to disable IPv6 in CentOS 7.</p>
+</div>
+<div class="section" id="to-disable-ipv6-on-startup">
+<h3>To disable IPv6 on startup:<a class="headerlink" href="#to-disable-ipv6-on-startup" title="Permalink to this headline">¶</a></h3>
+<p>Add the following to /etc/sysctl.conf</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">net</span><span class="o">.</span><span class="n">ipv6</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">all</span><span class="o">.</span><span class="n">disable_ipv6</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">net</span><span class="o">.</span><span class="n">ipv6</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">default</span><span class="o">.</span><span class="n">disable_ipv6</span> <span class="o">=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="to-disable-ipv6-running">
+<h3>To disable IPv6 running:<a class="headerlink" href="#to-disable-ipv6-running" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">echo</span> <span class="mi">1</span> <span class="o">&gt;</span> <span class="o">/</span><span class="n">proc</span><span class="o">/</span><span class="n">sys</span><span class="o">/</span><span class="n">net</span><span class="o">/</span><span class="n">ipv6</span><span class="o">/</span><span class="n">conf</span><span class="o">/</span><span class="nb">all</span><span class="o">/</span><span class="n">disable_ipv6</span>
+<span class="n">echo</span> <span class="mi">1</span> <span class="o">&gt;</span> <span class="o">/</span><span class="n">proc</span><span class="o">/</span><span class="n">sys</span><span class="o">/</span><span class="n">net</span><span class="o">/</span><span class="n">ipv6</span><span class="o">/</span><span class="n">conf</span><span class="o">/</span><span class="n">default</span><span class="o">/</span><span class="n">disable_ipv6</span>
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sysctl</span> <span class="o">-</span><span class="n">w</span> <span class="n">net</span><span class="o">.</span><span class="n">ipv6</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">all</span><span class="o">.</span><span class="n">disable_ipv6</span><span class="o">=</span><span class="mi">1</span>
+<span class="n">sysctl</span> <span class="o">-</span><span class="n">w</span> <span class="n">net</span><span class="o">.</span><span class="n">ipv6</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">default</span><span class="o">.</span><span class="n">disable_ipv6</span><span class="o">=</span><span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="get-correct-interface-name">
+<h3>Get correct interface name<a class="headerlink" href="#get-correct-interface-name" title="Permalink to this headline">¶</a></h3>
+<p>CentOS 7 does not assign network interface names as eth0, eth1, etc, but
+rather assigns “predictable” names to each interface that generally look
+like <code class="docutils literal notranslate"><span class="pre">ens32</span></code> or similar. There are many benefits to this that can be
+read about
+<a class="reference external" href="https://www.freedesktop.org/wiki/Software/systemd/PredictableNetworkInterfaceNames/">here</a>.</p>
+<p>This can be disabled as documented in the above link, however, these
+names can otherwise be simply found and used in the ECS-Community
+installer without issue. To find the names for each device enter the
+following command: <code class="docutils literal notranslate"><span class="pre">ip</span> <span class="pre">a</span></code>. This command will output a list of network
+devices. Simply find the corresponding device and substitute it for eth0
+in the stage1 installation script.</p>
+</div>
+<div class="section" id="port-conflicts">
+<h3>Port Conflicts<a class="headerlink" href="#port-conflicts" title="Permalink to this headline">¶</a></h3>
+<p>It is possible that on multinode installations ECS may run into a port
+conflict. So far there exists a port conflict with the following:</p>
+<ul class="simple">
+<li><p>ScaleIO - Ports: 9011, 9099</p></li>
+</ul>
+<p>In these instances the user can attempt to:</p>
+<ol class="arabic simple">
+<li><p>Enter the container</p></li>
+<li><p>Change all instances of the conflicting ports to unused ports in
+<code class="docutils literal notranslate"><span class="pre">/opt/storageos/conf</span></code></p></li>
+<li><p>Reboot the nodes after altering the conf file.</p></li>
+</ol>
+</div>
+<div class="section" id="list-of-open-ports-required-on-each-ecs-data-node">
+<h3>List of open ports required on each ECS data node<a class="headerlink" href="#list-of-open-ports-required-on-each-ecs-data-node" title="Permalink to this headline">¶</a></h3>
+<p>Ensure the ports in the following table are open for communication. In
+the case of a multiple-node installation, additionally ensure that each
+node is trusted to itself and to other nodes in the system by using the
+following command on each node:</p>
+<p><code class="docutils literal notranslate"><span class="pre">firewall-cmd</span> <span class="pre">--permanent</span> <span class="pre">--zone=trusted</span> <span class="pre">--add-source=&lt;ECS-node-IP&gt;/32</span></code></p>
+<p>followed by <code class="docutils literal notranslate"><span class="pre">firewall-cmd</span> <span class="pre">--reload</span></code> for each host.</p>
+<p><code class="docutils literal notranslate"><span class="pre">fwd_settings.sh</span></code> in the main directory will invoke the <code class="docutils literal notranslate"><span class="pre">firewalld</span></code>
+service and permanently open necessary ports. In the case of a failure
+in this setup referencing <code class="docutils literal notranslate"><span class="pre">iptables</span></code>, please ensure that your docker
+network bridge is running and installed using
+<code class="docutils literal notranslate"><span class="pre">yum</span> <span class="pre">install</span> <span class="pre">bridge-utils</span></code>.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Port Name-Usage=Port Number</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>port.ssh=22</p></td>
+</tr>
+<tr class="row-odd"><td><p>port.ecsportal=80</p></td>
+</tr>
+<tr class="row-even"><td><p>port.rcpbind=111</p></td>
+</tr>
+<tr class="row-odd"><td><p>port.activedir=389</p></td>
+</tr>
+<tr class="row-even"><td><p>port.ecsportalsvc=443</p></td>
+</tr>
+<tr class="row-odd"><td><p>port.activedirssl=636</p></td>
+</tr>
+<tr class="row-even"><td><p>port.ssm=1095</p></td>
+</tr>
+<tr class="row-odd"><td><p>port.rm=1096</p></td>
+</tr>
+<tr class="row-even"><td><p>port.blob=1098</p></td>
+</tr>
+<tr class="row-odd"><td><p>port.provision=1198</p></td>
+</tr>
+<tr class="row-even"><td><p>port.objhead=1298</p></td>
+</tr>
+<tr class="row-odd"><td><p>port.nfs=2049</p></td>
+</tr>
+<tr class="row-even"><td><p>port.zookeeper=2181</p></td>
+</tr>
+<tr class="row-odd"><td><p>port.coordinator=2889</p></td>
+</tr>
+<tr class="row-even"><td><p>port.cassvc=3218</p></td>
+</tr>
+<tr class="row-odd"><td><p>port.ecsmgmtapi=4443</p></td>
+</tr>
+<tr class="row-even"><td><p>port.rmmvdcr=5120</p></td>
+</tr>
+<tr class="row-odd"><td><p>port.rmm=5123</p></td>
+</tr>
+<tr class="row-even"><td><p>port.coordinator=7399</p></td>
+</tr>
+<tr class="row-odd"><td><p>port.coordinatorsvc=7400</p></td>
+</tr>
+<tr class="row-even"><td><p>port.rmmcmd=7578</p></td>
+</tr>
+<tr class="row-odd"><td><p>port.objcontrolUnsecure=9010</p></td>
+</tr>
+<tr class="row-even"><td><p>port.objcontrolSecure=9011</p></td>
+</tr>
+<tr class="row-odd"><td><p>port.s3MinUnsecure=9020</p></td>
+</tr>
+<tr class="row-even"><td><p>port.s3MinSecure=9021</p></td>
+</tr>
+<tr class="row-odd"><td><p>port.atmosMinUnsecure=9022</p></td>
+</tr>
+<tr class="row-even"><td><p>port.atmosMinSecure=9023</p></td>
+</tr>
+<tr class="row-odd"><td><p>port.swiftMinUnsecure=9024</p></td>
+</tr>
+<tr class="row-even"><td><p>port.swiftMinSecure=9025</p></td>
+</tr>
+<tr class="row-odd"><td><p>port.apiServerMinUnsecure=9028</p></td>
+</tr>
+<tr class="row-even"><td><p>port.apiServerMinSecure=9029</p></td>
+</tr>
+<tr class="row-odd"><td><p>port.hdfssvc=9040</p></td>
+</tr>
+<tr class="row-even"><td><p>port.netserver=9069</p></td>
+</tr>
+<tr class="row-odd"><td><p>port.cm=9091</p></td>
+</tr>
+<tr class="row-even"><td><p>port.geoCmdMinUnsecure=9094</p></td>
+</tr>
+<tr class="row-odd"><td><p>port.geoCmdMinSecure=9095</p></td>
+</tr>
+<tr class="row-even"><td><p>port.geoDataMinUnsecure=9096</p></td>
+</tr>
+<tr class="row-odd"><td><p>port.geoDataMinSecure=9097</p></td>
+</tr>
+<tr class="row-even"><td><p>port.geo=9098</p></td>
+</tr>
+<tr class="row-odd"><td><p>port.ss=9099</p></td>
+</tr>
+<tr class="row-even"><td><p>port.dtquery=9100</p></td>
+</tr>
+<tr class="row-odd"><td><p>port.dtqueryrecv=9101</p></td>
+</tr>
+<tr class="row-even"><td><p>port.georeplayer=9111</p></td>
+</tr>
+<tr class="row-odd"><td><p>port.stat=9201</p></td>
+</tr>
+<tr class="row-even"><td><p>port.statWebServer=9202</p></td>
+</tr>
+<tr class="row-odd"><td><p>port.vnest=9203</p></td>
+</tr>
+<tr class="row-even"><td><p>port.vnesthb=9204</p></td>
+</tr>
+<tr class="row-odd"><td><p>port.vnestMinUnsecure=9205</p></td>
+</tr>
+<tr class="row-even"><td><p>port.vnestMinSecure=9206</p></td>
+</tr>
+<tr class="row-odd"><td><p>port.hdfs=9208</p></td>
+</tr>
+<tr class="row-even"><td><p>port.event=9209</p></td>
+</tr>
+<tr class="row-odd"><td><p>port.objcontrolsvc=9212</p></td>
+</tr>
+<tr class="row-even"><td><p>port.zkutils=9230</p></td>
+</tr>
+<tr class="row-odd"><td><p>port.cas=9250</p></td>
+</tr>
+<tr class="row-even"><td><p>port.resource=9888</p></td>
+</tr>
+<tr class="row-odd"><td><p>port.tcpIpcServer=9898</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">ECS Software 3.x - Troubleshooting Tips</a><ul>
+<li><a class="reference internal" href="#installation">Installation</a><ul>
+<li><a class="reference internal" href="#if-you-change-deploy-yml-after-running-step1-you-must-run-update-deploy-before-running-step1-again-otherwise-you-will-likely-get-the-following-error">If you change deploy.yml after running step1, you must run <code class="docutils literal notranslate"><span class="pre">update_deploy</span></code> before running step1 again. Otherwise you will likely get the following error:</a></li>
+<li><a class="reference internal" href="#a-block-device-configured-in-deploy-yml-for-data-nodes-is-already-partitioned"><code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">block</span> <span class="pre">device</span> <span class="pre">configured</span> <span class="pre">in</span> <span class="pre">deploy.yml</span> <span class="pre">for</span> <span class="pre">data</span> <span class="pre">nodes</span> <span class="pre">is</span> <span class="pre">already</span> <span class="pre">partitioned.</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#provisioning-of-ecs">Provisioning of ECS</a><ul>
+<li><a class="reference internal" href="#checking-step-2-object-provisioning-progress">Checking Step 2 Object provisioning progress</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ecs-services">ECS Services</a><ul>
+<li><a class="reference internal" href="#docker-container-immediately-exits-on-startup">Docker Container immediately exits on startup</a></li>
+<li><a class="reference internal" href="#ecs-web-portal-will-not-start">ECS web portal will not start</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#nfs">NFS</a><ul>
+<li><a class="reference internal" href="#necessary-nfs-ports">Necessary NFS Ports</a></li>
+<li><a class="reference internal" href="#nfs-volume-refuses-to-mount">NFS Volume Refuses to Mount</a><ul>
+<li><a class="reference internal" href="#the-problem">The Problem</a></li>
+<li><a class="reference internal" href="#the-solution">The Solution</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ibm-tivoli-monitoring">IBM Tivoli Monitoring</a><ul>
+<li><a class="reference internal" href="#issue">Issue</a></li>
+<li><a class="reference internal" href="#analysis">Analysis</a></li>
+<li><a class="reference internal" href="#workaround">Workaround</a><ul>
+<li><a class="reference internal" href="#changing-the-port-on-ecs">Changing the port on ECS</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#network-troubleshooting">Network Troubleshooting</a><ul>
+<li><a class="reference internal" href="#for-those-operating-behind-emc-firewall">For those operating behind EMC firewall</a></li>
+<li><a class="reference internal" href="#disabling-ipv6">Disabling IPv6</a></li>
+<li><a class="reference internal" href="#to-disable-ipv6-on-startup">To disable IPv6 on startup:</a></li>
+<li><a class="reference internal" href="#to-disable-ipv6-running">To disable IPv6 running:</a></li>
+<li><a class="reference internal" href="#get-correct-interface-name">Get correct interface name</a></li>
+<li><a class="reference internal" href="#port-conflicts">Port Conflicts</a></li>
+<li><a class="reference internal" href="#list-of-open-ports-required-on-each-ecs-data-node">List of open ports required on each ECS data node</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../utilities/utilities.html"
+                        title="previous chapter">ECS Community Edition Utilities</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="FAQ.html"
+                        title="next chapter">Frequently Asked Questions</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/troubleshooting/ECS-Troubleshooting.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="FAQ.html" title="Frequently Asked Questions"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../utilities/utilities.html" title="ECS Community Edition Utilities"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">ECS-CommunityEdition 3.2.2.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, Dell-EMC.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.0.
+    </div>
+  </body>
+</html>
