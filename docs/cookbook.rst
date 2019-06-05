@@ -16,7 +16,7 @@ Crawl a page slowly
 -------------------
 
 To add a delay to your crawler,
-use :option:`-d`::
+use `-d`::
 
         crawler -d 10 <url>
 
@@ -25,7 +25,7 @@ This will wait 10 seconds between page fetches.
 Crawl only your blog
 --------------------
 
-You will want to use the :option:`-i` flag,
+You will want to use the `-i` flag,
 which while ignore URLs matching the passed regex::
 
         crawler -i "^blog/" <url>
@@ -33,10 +33,10 @@ which while ignore URLs matching the passed regex::
 This will only crawl pages that contain your blog URL.
 
 
-        Only crawl certain pages
-        ------------------------
+Only crawl certain pages
+------------------------
 
-        You will want to use the :option:`-i` flag,
+        You will want to use the `-i` flag,
         which while ignore URLs matching the passed regex::
 
                 crawler -i "pdf$" <url>
