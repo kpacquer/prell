@@ -1,0 +1,6 @@
+About this guide
+=================================
+
+This guide describes how to monitor and analyze Isilon cluster data using Insight360.
+
+This guide is task-based and structured with a chapter for each page in the Insight360 application.
