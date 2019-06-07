@@ -22,4 +22,4 @@ Support for IsilonSD Edge
 
 If you are running a free version of IsilonSD Edge, community support is available through the EMC Isilon Community Network. However, if you have purchased one or more licenses of IsilonSD Edge, you can contact EMC Isilon Technical Support for assistance, provided you have a valid support contract for the product.
 
-.. `support@emc.com`: mailto:support@emc.com
+.. _`support@emc.com`: mailto:support@emc.com

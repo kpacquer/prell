@@ -3,7 +3,7 @@ Summary Page
 
 The Summary page is a multi-cluster overview designed to give an at-a-glance view of the state of each cluster being monitored. It also acts as a portal to drill into more specific details about each cluster. Searching, sorting, and filtering options are available to help identify a specific cluster, or to compare a set of clusters side by side.
 	
-*Note*: When logging into Insight360 for the first time, you will need to add clusters to be monitored from the *Settings* menu.
+*Note*: When logging into InsightIQ for the first time, you will need to add clusters to be monitored from the *Settings* menu.
 
 Monitored clusters appear in the UI as either cards or list items. These components provide a summary view of a clusters connection health, capacity, network throughput, OneFS version, node count and more.
 
@@ -50,4 +50,4 @@ Opening Cluster Details
 
     The `Cluster Details page`_ opens.
 
-    .. _`Cluster Details page`: _cluster_details_page
+    
