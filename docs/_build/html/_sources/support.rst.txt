@@ -1,0 +1,25 @@
+Where to go for support
+=================================
+
+If you have any questions about EMC Isilon products, contact EMC Isilon Technical Support.
+
++--------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Online support           | `Live Chat`                                                                                                                                                                                                                                                                                 |
+|                          | `Create a Service Request`                                                                                                                                                                                                                                                                  |
++--------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Telephone support        | United States: 1-800-SVC-4EMC (800-782-4362)                                                                                                                                                                                                                                                |
+|                          | Canada: 800-543-4782                                                                                                                                                                                                                                                                        |
+|                          | Worldwide: +1-508-497-7901                                                                                                                                                                                                                                                                  |
+|                          | For local phone numbers for a specific country, see EMC Customer Support Centers.                                                                                                                                                                                                           |
++--------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Help with online support | For questions specific to EMC Online Support registration or access, email `support@emc.com`_.                                                                                                                                                                                              |
++--------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Isilon Info Hubs         | For the list of Isilon info hubs, see the {Conref}Isilon Info Hubs page on the EMC Isilon Community Network. Isilon info hubs organize Isilon documentation, videos, blogs, and user-contributed content into topic areas, making it easy to find content about subjects that interest you. |
++--------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+Support for IsilonSD Edge
+-------------------------
+
+If you are running a free version of IsilonSD Edge, community support is available through the EMC Isilon Community Network. However, if you have purchased one or more licenses of IsilonSD Edge, you can contact EMC Isilon Technical Support for assistance, provided you have a valid support contract for the product.
+
+.. `support@emc.com`: mailto:support@emc.com
