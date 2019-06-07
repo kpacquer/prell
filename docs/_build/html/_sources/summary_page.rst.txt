@@ -48,4 +48,6 @@ Opening Cluster Details
 
 1. 	To see more detailed cluster information, click on the cluster.
 
-    The Cluster Details page opens.
+    The `Cluster Details page`_ opens.
+
+    .. _`Cluster Details page`: _cluster_details_page

@@ -17,7 +17,7 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'Prell'
+project = 'Insight360 User Guide'
 copyright = '2019, Prell Technologies'
 author = 'Prell Technologies'
 
