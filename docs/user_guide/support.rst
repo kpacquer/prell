@@ -31,5 +31,7 @@ If you are running a free version of IsilonSD Edge, community support is availab
 Feedback
 --------
 We value your feedback. Please let us know how we can improve this document.
+
 * Take the survey at https://www.research.net/s/isi-docfeedback
+
 * Send your comments or suggestions to `docfeedback@isilon.com <mailto:docfeedback@isilon.com>`_.
