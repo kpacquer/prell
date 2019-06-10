@@ -17,7 +17,7 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'InsightIQ Admin Guide'
+project = 'InsightIQ'
 copyright = '2019, Dell Technologies'
 author = 'Drell Technologies'
 

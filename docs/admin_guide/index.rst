@@ -13,12 +13,6 @@ This guide is task-based and structured with a chapter for each page in the Insi
    :maxdepth: 2
    :caption: Contents:
 
-   admin_guide\index.rst
-   user_guide\index.rst
-   
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+   support
+   summary_page
+   cluster_details_page
