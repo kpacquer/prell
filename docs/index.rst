@@ -16,9 +16,9 @@ This guide is task-based and structured with a chapter for each page in the Insi
    admin_guide/index.rst
    user_guide/index.rst
    
-Indices and tables
-==================
+#Indices and tables
+#==================
 
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+#* :ref:`genindex`
+#* :ref:`modindex`
+#* :ref:`search`

@@ -16,3 +16,10 @@ This guide is task-based and structured with a chapter for each page in the Insi
    support
    summary_page
    cluster_details_page
+
+   #Indices and tables
+#==================
+
+#* :ref:`genindex`
+#* :ref:`modindex`
+#* :ref:`search`
