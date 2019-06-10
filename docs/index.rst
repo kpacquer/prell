@@ -1,7 +1,7 @@
 .. Prell documentation master file, created by
    sphinx-quickstart on Wed Jun  5 14:13:00 2019.
 
-InsightIQ Admin Guide
+InsightIQ 4.1.2
 =================================
 
 *This guide describes how to configure and manage InsightIQ.*
