@@ -17,6 +17,7 @@ Specify the port through which InsightIQ connects.
    | Option            | Description                            |
    +===================+========================================+
    | port              | The port to connect to InsightIQ       |
+   +-------------------+----------------------------------------+
    | redirect_to_port  | The port to connect to InsightIQ       |
    +-------------------+----------------------------------------+
 
@@ -56,6 +57,7 @@ Table 1 Browser support with IPv6
 | Web browser    | Supported connection type         |
 +================+===================================+
 | Apple Safari   | DNS hostname or an SSL connection |
++----------------+-----------------------------------+
 | Google Chrome  | DNS hostname                      |
 +----------------+-----------------------------------+
 
