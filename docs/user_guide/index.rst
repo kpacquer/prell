@@ -84,8 +84,8 @@ InsightIQ features supported by OneFS versions
 | Reports - Quota, Capacity, and Deduplication
 | OneFS 7.1.0 or later
 | To view more than 1000 quotas at a time, the cluster must be running OneFS 7.2.0 or later. |
-+-------------------------+-------------+-------------------+
-| File System Analytics - Node pool and tier breakouts |
++------------------------------------------------------+-------------+-------------------+
+| File System Analytics - Node pool and tier breakouts 
 | OneFS 8.0.0 or later
 | None |
 +-------------------------+-------------+-------------------+
