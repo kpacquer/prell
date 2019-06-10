@@ -1,0 +1,186 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Configuring the InsightIQ system &#8212; InsightIQ 1.0 documentation</title>
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="nav-item nav-item-0"><a href="../index.html">InsightIQ 1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="configuring-the-insightiq-system">
+<h1>Configuring the InsightIQ system<a class="headerlink" href="#configuring-the-insightiq-system" title="Permalink to this headline">¶</a></h1>
+<p>Configure InsightIQ.</p>
+<p>InsightIQ configuration tasks include installation of SSL certificates, modifying port access, configuring LDAP authentication, and configuring email settings.</p>
+<div class="section" id="specify-the-insightiq-port">
+<h2>Specify the InsightIQ port<a class="headerlink" href="#specify-the-insightiq-port" title="Permalink to this headline">¶</a></h2>
+<p>Specify the port through which InsightIQ connects.</p>
+<ol class="arabic">
+<li><p>Open an SSH connection to the InsightIQ virtual machine and log in.</p></li>
+<li><p>In a text editor, open the <code class="docutils literal notranslate"><span class="pre">/etc/isilon/insightiq.ini</span></code> file, and specify the values for the following options.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 32%" />
+<col style="width: 68%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Option</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>port
+redirect_to_port</p></td>
+<td><p>The port to connect to InsightIQ
+The port to connect to InsightIQ</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Note</strong> The value must be the same for both settings. You must have root permissions to modify the <code class="docutils literal notranslate"><span class="pre">/etc/isilon/</span></code> insightiq.ini file. If you are logged in the InsightIQ administrator account, you can gain root access by beginning a command with sudo.</p>
+</li>
+<li><p>Save and close the <code class="docutils literal notranslate"><span class="pre">/etc/isilon/insightiq.ini</span></code> file.</p></li>
+<li><p>Restart InsightIQ by running the command iiq_restart.</p></li>
+</ol>
+</div>
+<div class="section" id="specify-an-ssl-certificate">
+<h2>Specify an SSL certificate<a class="headerlink" href="#specify-an-ssl-certificate" title="Permalink to this headline">¶</a></h2>
+<p>Specify a custom SSL certificate. Although InsightIQ includes a default SSL certificate, you can specify a custom SSL certificate.</p>
+<ol class="arabic">
+<li><p>Open an SSH connection to the InsightIQ virtual machine, and log in.</p></li>
+<li><p>On the InsightIQ virtual machine, save a copy of the SSL certificate files that you want to specify. The certificate files must be of the .crt and.key file types.</p></li>
+<li><p>Open the /etc/isilon/uwsgi.ini file in a text editor and update the value of the https setting with the path of the SSL certificate files. For example, the following text specifies the SSL certificate files that are in the <code class="docutils literal notranslate"><span class="pre">/etc/ssl/certs/</span></code> directory:</p>
+<p><code class="docutils literal notranslate"><span class="pre">https</span> <span class="pre">=</span> <span class="pre">[::]:443,/etc/ssl/certs/server.crt,/etc/ssl/certs/</span> <span class="pre">server.key,HIGH</span></code></p>
+</li>
+<li><p>Restart InsightIQ by running the following command:</p>
+<p><code class="docutils literal notranslate"><span class="pre">iiq_restart</span></code></p>
+</li>
+</ol>
+</div>
+<div class="section" id="connect-to-insightiq-over-ipv6">
+<h2>Connect to InsightIQ over IPv6<a class="headerlink" href="#connect-to-insightiq-over-ipv6" title="Permalink to this headline">¶</a></h2>
+<p>InsightIQ supports IPv6. You can connect to InsightIQ, monitor clusters, and connect to NFS data stores over IPv6.</p>
+<p>You can connect to an NFS data store over IPv6 only if IPv6 addresses are configured for both InsightIQ and the NFS server. You can monitor an Isilon cluster over IPv6 only if IPv6 addresses are configured for both the monitored cluster and InsightIQ, and the cluster is running OneFS 7.2.1 or later.</p>
+<p>If you connect to InsightIQ over IPv6 using an Apple Safari web browser, specify either a DNS hostname or an SSL URL. If you connect to InsightIQ over IPv6 using the Google Chrome web browser, specify a DNS hostname. You cannot connect to InsightIQ using an IP address while using Google Chrome, even if you specify an SSL connection type.</p>
+<p>Table 1 Browser support with IPv6</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 31%" />
+<col style="width: 69%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Web browser</p></th>
+<th class="head"><p>Supported connection type</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Apple Safari
+Google Chrome</p></td>
+<td><p>DNS hostname or an SSL connection
+DNS hostname</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="configure-outbound-email-support">
+<h2>Configure outbound email support<a class="headerlink" href="#configure-outbound-email-support" title="Permalink to this headline">¶</a></h2>
+<p>To send reports and InsightIQ status alerts by email, configure InsightIQ to use an email server.</p>
+<ol class="arabic simple">
+<li><p>In the InsightIQ web application, click the Settings tab and then <strong>Email</strong> on the <strong>Settings</strong> ribbon. The <strong>Configure Email Settings (SMTP)</strong> view appears.</p></li>
+<li><p>In the SMTP server field, type the hostname or IP address of an SMTP server that handles email for the organization.</p></li>
+<li><p>In the SMTP port field, type the number of the port that is used to connect to the SMTP server that you specified.</p></li>
+<li><p>If the SMTP server that you specified requires a username and password for authentication, in the <strong>Username</strong> and <strong>Password</strong> fields, specify a valid username and password.</p></li>
+<li><p>If the SMTP server you specified accepts email only from valid email addresses, type a valid email address in the <strong>From Email</strong> field. The address that you type appears in the <strong>From</strong> field of email messages.</p></li>
+<li><p>If either the Transport Layer Security (TLS) or Secure Sockets Layer (SSL) protocol is required to connect to the SMTP server that you specified, select the <strong>TLS Connection</strong> checkbox.</p></li>
+<li><p>Click <strong>Submit</strong>.</p></li>
+</ol>
+</div>
+<div class="section" id="testing-the-email-configuration">
+<h2>Testing the email configuration<a class="headerlink" href="#testing-the-email-configuration" title="Permalink to this headline">¶</a></h2>
+<p>Validate the InsightIQ email configuration by sending a test email.</p>
+<ol class="arabic simple">
+<li><p>In the InsightIQ web application, click the <strong>Settings</strong> tab and then <strong>Email</strong> on the <strong>Settings</strong> ribbon.</p></li>
+<li><p>In the <strong>Send a test email field</strong>, type the name of an email address.</p></li>
+<li><p>Click <strong>Send</strong>.</p></li>
+<li><p>Check the recipient email inbox. If you have configured InsightIQ correctly, a test email arrives.</p></li>
+</ol>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Configuring the InsightIQ system</a><ul>
+<li><a class="reference internal" href="#specify-the-insightiq-port">Specify the InsightIQ port</a></li>
+<li><a class="reference internal" href="#specify-an-ssl-certificate">Specify an SSL certificate</a></li>
+<li><a class="reference internal" href="#connect-to-insightiq-over-ipv6">Connect to InsightIQ over IPv6</a></li>
+<li><a class="reference internal" href="#configure-outbound-email-support">Configure outbound email support</a></li>
+<li><a class="reference internal" href="#testing-the-email-configuration">Testing the email configuration</a></li>
+</ul>
+</li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/admin_guide/configuring_the_insight_iq_system.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="nav-item nav-item-0"><a href="../index.html">InsightIQ 1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, Dell Technologies.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.0.
+    </div>
+  </body>
+</html>
