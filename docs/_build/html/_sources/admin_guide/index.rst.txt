@@ -15,7 +15,7 @@ This guide is task-based and structured with a chapter for each page in the Insi
 
    support
    configuration_overview
-   configuring_the_insight_iq_system
+     configuring_the_insight_iq_system
 
 .. Indices and tables
 .. ==================

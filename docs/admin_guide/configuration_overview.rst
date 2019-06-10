@@ -6,7 +6,7 @@ InsightIQ system settings are managed in the InsightIQ web application. The Insi
 **Note** Depending on which version of the OneFS operating system the monitored cluster is running, certain InsightIQ features might not be available.
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
    :caption: Contents:
 
    configuring_the_insight_iq_system.rst
