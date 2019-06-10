@@ -4,6 +4,11 @@
 InsightIQ User Guide
 =================================
 
+   support
+   summary_page
+   cluster_details_page
+
+
 *InsightIQ provides tools to monitor and analyze historical data from Isilon clusters.*
 
 
