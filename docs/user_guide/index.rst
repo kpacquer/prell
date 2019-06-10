@@ -4,6 +4,11 @@
 InsightIQ User Guide
 =================================
 
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Contents:
+   
    support
    summary_page
    cluster_details_page
