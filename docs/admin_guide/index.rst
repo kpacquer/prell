@@ -14,12 +14,13 @@ This guide is task-based and structured with a chapter for each page in the Insi
    :caption: Contents:
 
    support
-   summary_page
-   cluster_details_page
+   configuration_overview
+   configuring_the_insight_iq_system
 
-   #Indices and tables
-#==================
+.. Indices and tables
+.. ==================
 
-#* :ref:`genindex`
-#* :ref:`modindex`
-#* :ref:`search`
+.. * :ref:`genindex`
+.. * :ref:`modindex`
+.. * :ref:`search`
+
