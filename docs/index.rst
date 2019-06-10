@@ -13,8 +13,8 @@ This guide is task-based and structured with a chapter for each page in the Insi
    :maxdepth: 2
    :caption: Contents:
 
-   admin_guide\index.rst
-   user_guide\index.rst
+   admin_guide/index.rst
+   user_guide/index.rst
    
 Indices and tables
 ==================
