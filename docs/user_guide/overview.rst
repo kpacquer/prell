@@ -61,18 +61,12 @@ InsightIQ can be used with clusters that run versions of OneFS earlier than OneF
 
 InsightIQ features supported by OneFS versions
 
-+-------------------------+-------------+-------------------+
-| InsightIQ feature       | Requirement | Notes             |
-+=========================+=============+===================+
-| Performance modules - Cache, Event Summary, Node pool, and Tier breakouts
-| OneFS 7.1.0 or later
-| To view data about L3 cache, the cluster must be running OneFS 7.1.1 or later. |
-+-------------------------+-------------+-------------------+
-| Reports - Quota, Capacity, and Deduplication
-| OneFS 7.1.0 or later
-| To view more than 1000 quotas at a time, the cluster must be running OneFS 7.2.0 or later. |
-+------------------------------------------------------+-------------+-------------------+
-| File System Analytics - Node pool and tier breakouts 
-| OneFS 8.0.0 or later
-| None |
-+-------------------------+-------------+-------------------+
++---------------------------------------------------------------------------+----------------------+--------------------------------------------------------------------------------------------+
+| InsightIQ feature                                                         | Requirement          | Notes                                                                                      |
++===========================================================================+======================+============================================================================================+
+| Performance modules - Cache, Event Summary, Node pool, and Tier breakouts | OneFS 7.1.0 or later | To view data about L3 cache, the cluster must be running OneFS 7.1.1 or later.             |
++---------------------------------------------------------------------------+----------------------+--------------------------------------------------------------------------------------------+
+| Reports - Quota, Capacity, and Deduplication                              | OneFS 7.1.0 or later | To view more than 1000 quotas at a time, the cluster must be running OneFS 7.2.0 or later. |
++---------------------------------------------------------------------------+----------------------+--------------------------------------------------------------------------------------------+
+| File System Analytics - Node pool and tier breakouts                      | OneFS 8.0.0 or later | None                                                                                       |
++---------------------------------------------------------------------------+----------------------+--------------------------------------------------------------------------------------------+
