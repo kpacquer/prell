@@ -48,6 +48,6 @@ Opening Cluster Details
 
 1. 	To see more detailed cluster information, click on the cluster.
 
-    The doc:`cluster_details_page` opens.
+    The :doc:`cluster_details_page` opens.
 
     
