@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>InsightIQ User Guide &#8212; InsightIQ 1.0 documentation</title>
+    <title>InsightIQ User Guide &#8212; InsightIQ 4.1.2 documentation</title>
     <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     
@@ -16,6 +16,7 @@
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Where to go for support" href="support.html" />
     <link rel="prev" title="Configuring the InsightIQ system" href="../admin_guide/configuring_the_insight_iq_system.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
@@ -25,9 +26,12 @@
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
+          <a href="support.html" title="Where to go for support"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
           <a href="../admin_guide/configuring_the_insight_iq_system.html" title="Configuring the InsightIQ system"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">InsightIQ 1.0 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">InsightIQ 4.1.2 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -38,39 +42,30 @@
             
   <div class="section" id="insightiq-user-guide">
 <h1>InsightIQ User Guide<a class="headerlink" href="#insightiq-user-guide" title="Permalink to this headline">¶</a></h1>
-<p><em>InsightIQ provides tools to monitor and analyze historical data from Isilon clusters.</em></p>
-<p>With InsightIQ, in the InsightIQ web application, you can view standard or customized Performance reports and File System reports, to monitor and analyze Isilon cluster activity. You can create customized reports to view information about storage cluster hardware, software, and protocol operations. You can publish, schedule, and share reports, and you can export the data to a third-party application.</p>
-<p>You can create and view specific InsightIQ reports to identify or confirm the cause of a performance issue. For example, if users report client connectivity issues during certain dates, you can create a report that indicates the cause of the issue. InsightIQ enables you to correlate data across present and historical conditions.
-If you modify the Isilon cluster environment, you can measure the effects of those changes by creating an InsightIQ report that compares the past performance with the performance after the changes were made. For example, if you add 20 new clients, you can create a report to compare the performance before the change and after the change. This comparison allows you to determine the impact of the additional clients on system performance.</p>
-<p>Create customized reports that help to identify bottlenecks or inefficiencies in Isilon cluster systems and workflows. For example, if you want to verify that all clients can access the cluster quickly and efficiently, you can create a report that measures which client connections are faster or slower. You can then modify the report to add breakouts and filters to identify the cause of the slower connections.</p>
-<p>Customized reports provide specific information about cluster operations. For example, if you recently deployed an Isilon cluster, you might want to view a customized report that illustrates how the cluster and its individual components are performing.</p>
-<p>A review of past performance trends can help you predict future trends and needs. For example, if you deployed an Isilon cluster for a data-archival project 6 months ago, you might want to estimate when the cluster reaches its maximum capacity. You can customize a report to illustrate capacity usage by day, week, or month to estimate when the cluster reaches capacity.</p>
-<p>You can install InsightIQ on a Linux computer or on a virtual machine. Configure settings such as the IP address of InsightIQ and the administrator password in the InsightIQ console interface.</p>
-<div class="section" id="monitoring-clusters-with-insightiq-dashboard">
-<h2>Monitoring clusters with InsightIQ Dashboard<a class="headerlink" href="#monitoring-clusters-with-insightiq-dashboard" title="Permalink to this headline">¶</a></h2>
-<p><em>View the status of all the monitored clusters.</em></p>
-<p>InsightIQ Dashboard, available through the InsightIQ web application, provides you with an overview of the status of all the monitored clusters. The Cluster Status summary includes information about cluster capacity, clients, throughput, and CPU usage. Current information about the monitored clusters appears alongside graphs that show the relative changes in the statistics over the past 12 hours.</p>
-<p>The Aggregated Cluster Overview section displays the total or average values of the status information for the monitored clusters. This information can help you decide what to include in a Performance report. For example, if the total amount of network traffic for all the monitored clusters is higher than anticipated, a customized Performance report can show you the data about network traffic. The report can show you the network throughput by direction, by using breakouts, to help you determine whether one direction of throughput is contributing to the total more than the other.</p>
-</div>
-<div class="section" id="performance-reports-and-file-system-reports">
-<h2>Performance reports and File System reports<a class="headerlink" href="#performance-reports-and-file-system-reports" title="Permalink to this headline">¶</a></h2>
-<p><em>Monitor EMC Isilon clusters with customizable reports.</em></p>
-<p>Performance reports include information about the cluster activity and capacity. The information can help you confirm that storage clusters perform as expected, and help you identify the specific cause of a performance-related issue to investigate. File System reports include information about the cluster file system, including deduplication, quotas, and usable capacity. The information can help you identify the types of data that is stored and where the data is located.</p>
-<p>With InsightIQ, you can create live reports and view them through the InsightIQ web application. You can create live reports for Performance reports and File System reports. You can modify the attributes of live reports as you view the reports, including the period, breakouts, and filters.</p>
-<p>You can view Performance reports as a PDF file that is generated based on a report schedule that the administrator sets up. InsightIQ can be configured to send a PDF file as an email attachment. You can use a PDF file to verify cluster health or to distribute InsightIQ information to individuals who do not have access to the InsightIQ web application.</p>
-</div>
-<div class="section" id="report-configuration">
-<h2>Report configuration<a class="headerlink" href="#report-configuration" title="Permalink to this headline">¶</a></h2>
-<p><em>InsightIQ reports are configured by using modules, breakouts, and filter rules.</em></p>
-<p>A module is a section of a report that displays information about a cluster. A breakout can be applied to a module so that users can view information about separate cluster components. A filter rule can be applied to a module so that users can view information about a specific component across the entire report. Filter rules can be combined into collections that are called filters. Filters can be saved and applied to multiple reports.</p>
-</div>
-<div class="section" id="insightiq-feature-compatibility-with-onefs">
-<h2>InsightIQ feature compatibility with OneFS<a class="headerlink" href="#insightiq-feature-compatibility-with-onefs" title="Permalink to this headline">¶</a></h2>
-<p>Certain InsightIQ features are supported on specific versions of OneFS.</p>
-<p><strong>OneFS feature compatibility</strong></p>
-<p><em>Certain InsightIQ features require specific versions of OneFS.</em></p>
-<p>InsightIQ can be used with clusters that run versions of OneFS earlier than OneFS 8.0.1. However, InsightIQ includes features that OneFS versions earlier than OneFS 8.0.1 do not support.</p>
-<p>InsightIQ features supported by OneFS versions</p>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="support.html">Where to go for support</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="support.html#support-for-isilonsd-edge">Support for IsilonSD Edge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="support.html#feedback">Feedback</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#monitoring-clusters-with-insightiq-dashboard">Monitoring clusters with InsightIQ Dashboard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#performance-reports-and-file-system-reports">Performance reports and File System reports</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#report-configuration">Report configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#insightiq-feature-compatibility-with-onefs">InsightIQ feature compatibility with OneFS</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="summary_page.html">Summary Page</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="summary_page.html#changing-the-summary-view">Changing the Summary View</a></li>
+<li class="toctree-l2"><a class="reference internal" href="summary_page.html#sorting-the-current-view">Sorting the current view</a></li>
+<li class="toctree-l2"><a class="reference internal" href="summary_page.html#filtering-the-current-view">Filtering the current view</a></li>
+<li class="toctree-l2"><a class="reference internal" href="summary_page.html#opening-cluster-details">Opening Cluster Details</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cluster_details_page.html">Cluster Details page</a></li>
+</ul>
 </div>
 </div>
 
@@ -80,20 +75,12 @@ If you modify the Isilon cluster environment, you can measure the effects of tho
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../index.html">Table of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">InsightIQ User Guide</a><ul>
-<li><a class="reference internal" href="#monitoring-clusters-with-insightiq-dashboard">Monitoring clusters with InsightIQ Dashboard</a></li>
-<li><a class="reference internal" href="#performance-reports-and-file-system-reports">Performance reports and File System reports</a></li>
-<li><a class="reference internal" href="#report-configuration">Report configuration</a></li>
-<li><a class="reference internal" href="#insightiq-feature-compatibility-with-onefs">InsightIQ feature compatibility with OneFS</a></li>
-</ul>
-</li>
-</ul>
-
   <h4>Previous topic</h4>
   <p class="topless"><a href="../admin_guide/configuring_the_insight_iq_system.html"
                         title="previous chapter">Configuring the InsightIQ system</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="support.html"
+                        title="next chapter">Where to go for support</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -122,9 +109,12 @@ If you modify the Isilon cluster environment, you can measure the effects of tho
           <a href="../genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
+          <a href="support.html" title="Where to go for support"
+             >next</a> |</li>
+        <li class="right" >
           <a href="../admin_guide/configuring_the_insight_iq_system.html" title="Configuring the InsightIQ system"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">InsightIQ 1.0 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">InsightIQ 4.1.2 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

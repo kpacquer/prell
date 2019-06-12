@@ -11,7 +11,7 @@ Specify the port through which InsightIQ connects.
 
 1. Open an SSH connection to the InsightIQ virtual machine and log in. 
 
-2. In a text editor, open the ``/etc/isilon/insightiq.ini`` file, and specify the values for the following options.
+2. In any text editor, open the ``/etc/isilon/insightiq.ini`` file, and specify the values for the following options.
   
    +-------------------+----------------------------------------+
    | Option            | Description                            |
